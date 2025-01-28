@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://bq6eu3v3vk74i"]
+[gd_scene load_steps=50 format=4 uid="uid://bq6eu3v3vk74i"]
 
 [ext_resource type="TileSet" uid="uid://cfrjn5djmx1x" path="res://scenes/test_tilemap.tres" id="1_egh4q"]
 [ext_resource type="Script" path="res://scripts/CameraController.cs" id="1_q51cu"]
@@ -23,6 +23,16 @@
 [ext_resource type="Texture2D" uid="uid://vo3rs4nof4sg" path="res://images/Organized separated sprites/Modular Bushes/Zombie-Tileset---_0090_Capa-91.png" id="12_xai6b"]
 [ext_resource type="Script" path="res://scripts/InteractableTileMap.cs" id="13_t4xal"]
 [ext_resource type="Texture2D" uid="uid://din0tc8b6y76r" path="res://images/Organized separated sprites/Modular Bushes/Zombie-Tileset---_0088_Capa-89.png" id="13_vr5by"]
+[ext_resource type="Script" path="res://scripts/EnemyBase.cs" id="24_alq2x"]
+[ext_resource type="Texture2D" uid="uid://b5jphef03u3ab" path="res://images/Organized separated sprites/Kid Zombie Animation Frames/Zombie-Tileset---_0430_Capa-431.png" id="24_u3nlw"]
+[ext_resource type="Texture2D" uid="uid://dbwpi66hoagyl" path="res://images/Organized separated sprites/Kid Zombie Animation Frames/Zombie-Tileset---_0431_Capa-432.png" id="25_0s2yj"]
+[ext_resource type="Texture2D" uid="uid://b55sq68cseidh" path="res://images/Organized separated sprites/Kid Zombie Animation Frames/Zombie-Tileset---_0432_Capa-433.png" id="26_b0vrr"]
+[ext_resource type="Texture2D" uid="uid://daopoo0yjbjr5" path="res://images/Organized separated sprites/Kid Zombie Animation Frames/Zombie-Tileset---_0433_Capa-434.png" id="27_j5b6q"]
+[ext_resource type="Texture2D" uid="uid://cvqd1vlp7phkr" path="res://images/Organized separated sprites/Kid Zombie Animation Frames/Zombie-Tileset---_0434_Capa-435.png" id="28_tuqab"]
+[ext_resource type="Texture2D" uid="uid://bnt2b4kn1o15t" path="res://images/Organized separated sprites/Kid Zombie Animation Frames/Zombie-Tileset---_0435_Capa-436.png" id="29_araav"]
+[ext_resource type="Texture2D" uid="uid://d440h50633fe" path="res://images/Organized separated sprites/Kid Zombie Animation Frames/Zombie-Tileset---_0436_Capa-437.png" id="30_0rxjt"]
+[ext_resource type="Texture2D" uid="uid://lam3hedvxg43" path="res://images/Organized separated sprites/Kid Zombie Animation Frames/Zombie-Tileset---_0437_Capa-438.png" id="31_l26hi"]
+[ext_resource type="Texture2D" uid="uid://kgpv01yntgj5" path="res://images/Organized separated sprites/Kid Zombie Animation Frames/Zombie-Tileset---_0438_Capa-439.png" id="32_10yqh"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_aoaqt"]
 tile_data = PackedInt32Array(0, 9, 0)
@@ -129,6 +139,55 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lekik"]
+radius = 6.0
+height = 14.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u7nf4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("24_u3nlw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_0s2yj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_b0vrr")
+}],
+"loop": true,
+"name": &"walk_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("27_j5b6q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_tuqab")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_araav")
+}],
+"loop": true,
+"name": &"walk_horizontal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("30_0rxjt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_l26hi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_10yqh")
+}],
+"loop": true,
+"name": &"walk_up",
+"speed": 5.0
+}]
+
 [node name="Node2D" type="Node2D"]
 
 [node name="Background" type="TileMapLayer" parent="."]
@@ -168,3 +227,16 @@ zoom = Vector2(2, 2)
 script = ExtResource("1_q51cu")
 FollowSpeed = 4.0
 Target = NodePath("../Player")
+
+[node name="Enemy" type="CharacterBody2D" parent="."]
+position = Vector2(39, 0)
+script = ExtResource("24_alq2x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+shape = SubResource("CapsuleShape2D_lekik")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_u7nf4")
+animation = &"walk_horizontal"
+frame_progress = 0.464833
