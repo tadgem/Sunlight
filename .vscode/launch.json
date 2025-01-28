@@ -1,0 +1,62 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      
+      {
+        "name": "🕹 Debug Game",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "build",
+        "program": "${env:GODOT4}",
+        "args": [],
+        "cwd": "${workspaceFolder}",
+        "stopAtEntry": false,
+        "console": "integratedTerminal"
+      },
+      // Debug the scene that matches the name of the currently open *.cs file
+      // (if there's a scene with the same name in the same directory).
+      {
+        "name": "🎭 Debug Current Scene",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "build",
+        "program": "${env:GODOT4}",
+        "args": [
+          "${fileDirname}/${fileBasenameNoExtension}.tscn"
+        ],
+        "cwd": "${workspaceFolder}",
+        "stopAtEntry": false,
+        "console": "integratedTerminal"
+      },
+      {
+        "name": "🧪 Debug Tests",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "build",
+        "program": "${env:GODOT4}",
+        "args": [
+          // These command line flags are used by GoDotTest to run tests.
+          "--run-tests",
+          "--quit-on-finish"
+        ],
+        "cwd": "${workspaceFolder}",
+        "stopAtEntry": false,
+        "console": "integratedTerminal"
+      },
+      {
+        "name": "🔬 Debug Current Test",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "build",
+        "program": "${env:GODOT4}",
+        "args": [
+          // These command line flags are used by GoDotTest to run tests.
+          "--run-tests=${fileBasenameNoExtension}",
+          "--quit-on-finish"
+        ],
+        "cwd": "${workspaceFolder}",
+        "stopAtEntry": false,
+        "console": "integratedTerminal"
+      },
+    ]
+  }
